@@ -12,6 +12,6 @@ class MainController {
 
     @GetMapping("/llamada")
     public List<String> index() {
-        return List.of("Hello cruel world","Hola mundo cruel");
+        return List.of("Hello cruel world.","Hola mundo cruel.");
     }
 }
