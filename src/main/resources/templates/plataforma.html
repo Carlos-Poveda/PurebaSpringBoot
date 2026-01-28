@@ -9,13 +9,10 @@
 <main>
     <h1>Biblioteca de juegos</h1>
     <nav>
-        <a th:href="@{/plataforma/PC}">PC</a>
-        <a th:href="@{/plataforma/PlayStation 4}">Play Station 4</a>
-        <a th:href="@{/plataforma/Nintendo Switch}">Nintendo Switch</a>
-        <a th:href="@{/plataforma/Xbox Series X}">XBox Series X</a>
-        <a th:href="@{/plataforma/Nintendo 64}">Nintendo 64</a>
-        <a th:href="@{/plataforma/Super Nintendo}">Super Nintendo</a>
-        <a th:href="@{/plataforma/Sega Genesis}">Sega Genesis</a>
+        <a th:each="plataforma : ${plataformas}"
+           th:href="@{/plataforma/{platform}(platform=${plataforma})}"
+           th:text="${plataforma}">
+        </a>
     </nav>
     <h1><span th:text="${plataforma}"></span></h1>
         <ul class="games-grid" th:if="${!#lists.isEmpty(videojuegos)}">

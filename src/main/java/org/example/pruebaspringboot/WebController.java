@@ -20,14 +20,15 @@ class WebController {
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("videojuegos", gameRepository.findAll());
+        model.addAttribute("plataformas", gameRepository.findDistinctPlatforms());
         return "index";
     }
 
     @GetMapping("/juego/{id}")
-    public String juego(@PathVariable Integer id, Model model)
-    {
+    public String juego(@PathVariable Integer id, Model model) {
         if(gameRepository.findById(id).isPresent()) {
             model.addAttribute("game", gameRepository.findById(id).get());
+            model.addAttribute("plataformas", gameRepository.findDistinctPlatforms());
             return "juego";
         } else {
             model.addAttribute("error","No existe el juego "+id);
@@ -37,9 +38,11 @@ class WebController {
 
     @GetMapping("/plataforma/{platform}")
     public String plataformGames(@PathVariable String platform, Model model) {
-        List<Game> games = gameRepository.findByPlatform(platform);
+        String platformName = platform.replace("-", " ");
+        List<Game> games = gameRepository.findByPlatform(platformName);
         model.addAttribute("videojuegos", games);
-        model.addAttribute("plataforma", platform);
+        model.addAttribute("plataforma", platformName);
+        model.addAttribute("plataformas", gameRepository.findDistinctPlatforms());
         return "plataforma";
     }
 
