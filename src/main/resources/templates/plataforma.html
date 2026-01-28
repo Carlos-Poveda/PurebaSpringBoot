@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Juegos de <span th:text="${plataforma}"></span></title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<main>
+    <h1>Biblioteca de juegos</h1>
+    <nav>
+        <a th:href="@{/plataforma/PC}">PC</a>
+        <a th:href="@{/plataforma/PlayStation 4}">Play Station 4</a>
+        <a th:href="@{/plataforma/Nintendo Switch}">Nintendo Switch</a>
+        <a th:href="@{/plataforma/Xbox Series X}">XBox Series X</a>
+        <a th:href="@{/plataforma/Nintendo 64}">Nintendo 64</a>
+        <a th:href="@{/plataforma/Super Nintendo}">Super Nintendo</a>
+        <a th:href="@{/plataforma/Sega Genesis}">Sega Genesis</a>
+    </nav>
+    <h1><span th:text="${plataforma}"></span></h1>
+        <ul class="games-grid" th:if="${!#lists.isEmpty(videojuegos)}">
+        <li class="game-card" th:each="juego : ${videojuegos}">
+            <a th:href="@{/juego/{id}(id=${juego.id})}" th:text="${juego.title}"></a>
+        </li>
+    </ul>
+
+    <p class="message" th:if="${#lists.isEmpty(videojuegos)}">
+        No hay juegos disponibles para esta plataforma.
+    </p>
+    <nav>
+        <a th:href="@{/}">Volver al inicio</a>
+    </nav>
+</main>
+</body>
+</html>

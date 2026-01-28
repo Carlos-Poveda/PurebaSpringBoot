@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${game.title}">Detalle del juego</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<main>
+    <h1>Biblioteca de Juegos</h1>
+
+    <nav>
+        <a th:href="@{/plataforma/PC}">PC</a>
+        <a th:href="@{/plataforma/PlayStation-4}">Play Station 4</a>
+        <a th:href="@{/plataforma/Nintendo-Switch}">Nintendo Switch</a>
+        <a th:href="@{/plataforma/Xbox-Series-X}">XBox Series X</a>
+        <a th:href="@{/plataforma/Nintendo-64}">Nintendo 64</a>
+        <a th:href="@{/plataforma/Super-Nintendo}">Super Nintendo</a>
+        <a th:href="@{/plataforma/Sega-Genesis}">Sega Genesis</a>
+    </nav>
+
+    <div class="game-detail">
+        <div class="game-detail-header">
+            <img th:src="@{https://picsum.photos/400/250}" alt="Game image" class="game-image">
+            <div class="game-info">
+                <h2 th:text="${game.title}">Nombre del juego</h2>
+                <p><strong>Plataforma:</strong> <span th:text="${game.platform}"></span></p>
+                <p><strong>Año:</strong> <span th:text="${game.year}"></span></p>
+            </div>
+        </div>
+
+        <div class="game-description" th:if="${game.description}">
+            <h3>Descripción</h3>
+            <p th:text="${game.description}"></p>
+        </div>
+    </div>
+
+    <nav>
+        <a th:href="@{/}">Volver</a>
+    </nav>
+</main>
+</body>
+</html>
