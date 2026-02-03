@@ -2,9 +2,7 @@ package org.example.pruebaspringboot;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -12,9 +10,12 @@ import java.util.List;
 @RequestMapping("/")
 class WebController {
 
-    GameRepository gameRepository;
-    public WebController(GameRepository gameRepository) {
+    private final MainService mainService;
+    private final GameRepository gameRepository;
+
+    public WebController(GameRepository gameRepository, MainService mainService) {
         this.gameRepository = gameRepository;
+        this.mainService = mainService;
     }
 
     @GetMapping("/")
@@ -27,7 +28,7 @@ class WebController {
     @GetMapping("/juego/{id}")
     public String juego(@PathVariable Integer id, Model model) {
         if(gameRepository.findById(id).isPresent()) {
-            model.addAttribute("game", gameRepository.findById(id).get());
+            model.addAttribute("juego", gameRepository.findById(id).get());
             model.addAttribute("plataformas", gameRepository.findDistinctPlatforms());
             return "juego";
         } else {
@@ -46,4 +47,28 @@ class WebController {
         return "plataforma";
     }
 
+    @PostMapping("/")
+    public String guardar(@ModelAttribute Game game) {
+        mainService.saveGame(game);
+        return "redirect:/";
+    }
+
+    @GetMapping("/nuevo")
+    public String nuevoJuego(Model model) {
+        model.addAttribute("juego", new Game());
+        model.addAttribute("plataformas", gameRepository.findDistinctPlatforms());
+        return "editar";
+    }
+
+    @GetMapping("/editar/{id}")
+    public String editar(@PathVariable Integer id, Model model) {
+        if(gameRepository.findById(id).isPresent()){
+            model.addAttribute("juego", gameRepository.findById(id).get());
+            model.addAttribute("plataformas", gameRepository.findDistinctPlatforms());
+            return "editar";
+        } else {
+            model.addAttribute("error","No existe el juego "+id);
+            return "error";
+        }
+    }
 }

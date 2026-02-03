@@ -7,7 +7,9 @@
 </head>
 <body>
 <main>
-    <h1>Biblioteca de juegos</h1>
+    <h1>
+        Biblioteca de juegos
+    </h1>
     <nav>
         <a th:each="plataforma : ${plataformas}"
            th:href="@{/plataforma/{platform}(platform=${plataforma})}"
@@ -17,6 +19,9 @@
     <ul class="games-grid">
         <li class="game-card" th:each="juego : ${videojuegos}">
             <a th:href="@{/juego/{id}(id=${juego.id})}" th:text="${juego.title}"></a>
+        </li>
+        <li class="game-card">
+            <a th:href="@{/nuevo}">+ Nuevo</a>
         </li>
     </ul>
 </main>

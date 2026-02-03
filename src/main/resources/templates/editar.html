@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:if="${juego.id != null}" th:text="'Editar ' + ${juego.title}">Nuevo Juego</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<main>
+    <form th:action="@{/}" th:object="${juego}" method="post">
+        <h3 th:if="${juego.id != null}" th:text="'Editar ' + ${juego.title}">Nuevo juego</h3>
+        <h3 th:if="${juego.id == null}">Nuevo juego</h3>
+
+        <input type="hidden" th:field="*{id}">
+
+        <div>
+            <label for="inputYear">Año:</label>
+            <input type="text" th:field="*{year}" id="inputYear">
+        </div>
+
+        <div>
+            <label for="inputDescrip">Descripción:</label>
+            <input type="text" th:field="*{description}" id="inputDescrip">
+        </div>
+
+        <div>
+            <label for="inputTitulo">Titulo:</label>
+            <input type="text" th:field="*{title}" id="inputTitulo">
+        </div>
+
+        <div>
+            <label for="inputPlataforma">Plataforma:</label>
+            <select id="inputPlataforma" th:field="*{platform}">
+                <option th:each="p:${plataformas}" th:value="${p}" th:text="${p}"></option>
+            </select>
+        </div>
+
+        <div>
+            <button>Enviar</button>
+            <a th:href="@{/}">Volver</a>
+        </div>
+    </form>
+</main>
+</body>
+</html>

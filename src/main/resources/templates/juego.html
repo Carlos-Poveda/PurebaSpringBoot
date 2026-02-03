@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${game.title}">Detalle del juego</title>
+    <title th:text="${juego.title}">Detalle del juego</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
@@ -20,20 +20,21 @@
         <div class="game-detail-header">
             <img th:src="@{https://picsum.photos/400/250}" alt="Game image" class="game-image">
             <div class="game-info">
-                <h2 th:text="${game.title}">Nombre del juego</h2>
-                <p><strong>Plataforma:</strong> <span th:text="${game.platform}"></span></p>
-                <p><strong>Año:</strong> <span th:text="${game.year}"></span></p>
+                <h2 th:text="${juego.title}">Nombre del juego</h2>
+                <p><strong>Plataforma:</strong> <span th:text="${juego.platform}"></span></p>
+                <p><strong>Año:</strong> <span th:text="${juego.year}"></span></p>
             </div>
         </div>
 
-        <div class="game-description" th:if="${game.description}">
+        <div class="game-description" th:if="${juego.description}">
             <h3>Descripción</h3>
-            <p th:text="${game.description}"></p>
+            <p th:text="${juego.description}"></p>
         </div>
     </div>
 
     <nav>
         <a th:href="@{/}">Volver</a>
+        <a th:href="@{/editar/{id}(id=${juego.id})}">Editar</a>
     </nav>
 </main>
 </body>

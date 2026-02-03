@@ -19,6 +19,9 @@
         <li class="game-card" th:each="juego : ${videojuegos}">
             <a th:href="@{/juego/{id}(id=${juego.id})}" th:text="${juego.title}"></a>
         </li>
+            <li class="game-card">
+                <a th:href="@{/nuevo}">+ Nuevo</a>
+            </li>
     </ul>
 
     <p class="message" th:if="${#lists.isEmpty(videojuegos)}">
